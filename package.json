@@ -1,0 +1,61 @@
+{
+  "name": "@knowledgesdk/mcp",
+  "version": "0.1.0",
+  "description": "Official KnowledgeSDK Model Context Protocol Server - AI assistant integration for web knowledge extraction",
+  "type": "module",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "bin": {
+    "@knowledgesdk/mcp": "./stdio.js"
+  },
+  "files": [
+    "dist",
+    "stdio.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "npm run clean && tsc -p tsconfig.build.json",
+    "clean": "rm -rf dist",
+    "test:local": "KNOWLEDGESDK_API_KEY=test node stdio.js",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
+    "publish-stable": "npm run build && npm publish",
+    "publish-beta": "npm run build && npm publish --tag beta"
+  },
+  "keywords": [
+    "mcp",
+    "knowledgesdk",
+    "knowledge",
+    "extraction",
+    "scraping",
+    "ai",
+    "assistant",
+    "model-context-protocol"
+  ],
+  "author": "KnowledgeSDK",
+  "license": "MIT",
+  "homepage": "https://knowledgesdk.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/knowledgesdk/knowledgesdk-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/knowledgesdk/knowledgesdk-mcp/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.5.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5"
+  }
+}
