@@ -25,7 +25,7 @@ export const createKnowledgeSdkMcpServer = (
 
   const server = new Server(
     {
-      name: "@knowledge/mcp",
+      name: "@knowledgesdk/mcp",
       version: "0.1.0",
     },
     {
