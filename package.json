@@ -41,7 +41,7 @@
   "homepage": "https://knowledgesdk.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/knowledgesdk/knowledgesdk-mcp.git"
+    "url": "https://github.com/KnowledgeSDK/knowledgesdk-mcp"
   },
   "bugs": {
     "url": "https://github.com/knowledgesdk/knowledgesdk-mcp/issues"
