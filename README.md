@@ -1,8 +1,35 @@
-# @knowledgesdk/mcp
+<p align="center">
+  <img src="https://knowledgesdk.com/knowledgesdk_light.svg" alt="KnowledgeSDK" width="300" />
+</p>
 
-Official [KnowledgeSDK](https://knowledgesdk.com) Model Context Protocol (MCP) Server.
+<p align="center">
+  <b>Official MCP Server for <a href="https://knowledgesdk.com">KnowledgeSDK</a></b><br/>
+  Give AI assistants the power to extract knowledge from any website via the Model Context Protocol.
+</p>
 
-Gives AI assistants the ability to extract structured knowledge from websites, scrape pages to markdown, classify businesses, discover sitemaps, take screenshots, and search a semantic knowledge base — all via the KnowledgeSDK API.
+<p align="center">
+  <a href="https://www.npmjs.com/package/@knowledgesdk/mcp">
+    <img src="https://img.shields.io/npm/v/@knowledgesdk/mcp.svg?style=flat-square" alt="NPM Version" />
+  </a>
+  <a href="https://github.com/KnowledgeSDK/knowledgesdk-mcp/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/KnowledgeSDK/knowledgesdk-mcp.svg?style=flat-square" alt="License" />
+  </a>
+</p>
+
+# KnowledgeSDK MCP Server
+
+## What is KnowledgeSDK?
+
+**KnowledgeSDK** is an API that turns any website into structured, searchable knowledge — built for developers, AI agents, and data pipelines.
+
+- 🔍 **Extract** — Crawl & extract structured knowledge from any website
+- 📄 **Scrape** — Convert any URL to clean Markdown
+- 🏢 **Classify** — AI-powered business classification from a URL
+- 📸 **Screenshot** — Full-page screenshots of any website
+- 🗺️ **Sitemap** — Discover all URLs on a domain
+- 🧠 **Search** — Semantic search across your extracted knowledge base
+
+> [Get your API key](https://knowledgesdk.com/connect)
 
 ## Tools
 
@@ -146,6 +173,18 @@ KNOWLEDGESDK_API_KEY=sk_ks_your_key npm run test:local
 
 ---
 
+## Documentation
+
+Full API reference → **<https://knowledgesdk.com/docs>**
+
+## Contributing
+
+We ❤️ PRs!
+
+1. **Fork** → `git checkout -b feat/awesome`
+2. Add tests & docs
+3. **PR** against `main`
+
 ## License
 
-MIT
+[MIT](LICENSE)
