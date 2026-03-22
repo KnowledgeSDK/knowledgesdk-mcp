@@ -1,4 +1,4 @@
-# @knowledgesdk/mcp
+# @knowledge/mcp
 
 Official [KnowledgeSDK](https://knowledgesdk.com) Model Context Protocol (MCP) Server.
 
@@ -33,9 +33,9 @@ Gives AI assistants the ability to extract structured knowledge from websites, s
 ```json
 {
   "mcpServers": {
-    "knowledgesdk": {
+    "knowledge": {
       "command": "npx",
-      "args": ["-y", "@knowledgesdk/mcp"],
+      "args": ["-y", "@knowledge/mcp"],
       "env": {
         "KNOWLEDGESDK_API_KEY": "sk_ks_your_key_here"
       }
@@ -58,7 +58,7 @@ You should now see the KnowledgeSDK tools available in your Claude Desktop conve
 4. Enter the following command:
 
 ```
-npx -y @knowledgesdk/mcp
+npx -y @knowledge/mcp
 ```
 
 5. Add the environment variable:
@@ -72,9 +72,9 @@ Alternatively, edit `~/.cursor/mcp.json` directly:
 ```json
 {
   "mcpServers": {
-    "knowledgesdk": {
+    "knowledge": {
       "command": "npx",
-      "args": ["-y", "@knowledgesdk/mcp"],
+      "args": ["-y", "@knowledge/mcp"],
       "env": {
         "KNOWLEDGESDK_API_KEY": "sk_ks_your_key_here"
       }
@@ -94,9 +94,9 @@ Alternatively, edit `~/.cursor/mcp.json` directly:
 ```json
 {
   "mcpServers": {
-    "knowledgesdk": {
+    "knowledge": {
       "command": "npx",
-      "args": ["-y", "@knowledgesdk/mcp"],
+      "args": ["-y", "@knowledge/mcp"],
       "env": {
         "KNOWLEDGESDK_API_KEY": "sk_ks_your_key_here"
       }
