@@ -1,6 +1,6 @@
 {
   "name": "@knowledgesdk/mcp",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Official KnowledgeSDK Model Context Protocol Server - AI assistant integration for web knowledge extraction",
   "type": "module",
   "main": "dist/src/index.js",
