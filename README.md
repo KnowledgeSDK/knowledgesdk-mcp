@@ -123,7 +123,7 @@ Or edit `~/.codeium/windsurf/mcp_config.json` directly with the same JSON block 
 Once configured, you can ask your AI assistant:
 
 - "Extract knowledge from https://stripe.com"
-- "Scrape the page at https://docs.example.com/getting-started"
+- "Scrape the page at https://docs.stripe.com/get-started"
 - "Classify the business at https://linear.app"
 - "Get the sitemap for https://vercel.com"
 - "Take a screenshot of https://github.com"
