@@ -26,12 +26,12 @@
 
 **KnowledgeSDK** is an API that turns any website into structured, searchable knowledge — built for developers, AI agents, and data pipelines.
 
-- 🔍 **Extract** — Crawl & extract structured knowledge from any website
-- 📄 **Scrape** — Convert any URL to clean Markdown
-- 🏢 **Classify** — AI-powered business classification from a URL
-- 📸 **Screenshot** — Full-page screenshots of any website
-- 🗺️ **Sitemap** — Discover all URLs on a domain
-- 🧠 **Search** — Semantic search across your extracted knowledge base
+- **Extract** — Convert any URL to clean Markdown (`/v1/extract`)
+- **Business** — Full AI extraction: business classification, product features, pricing, and key insights (`/v1/business`)
+- **Screenshot** — Full-page screenshots of any website (`/v1/screenshot`)
+- **Sitemap** — Discover all URLs on a domain (`/v1/sitemap`)
+- **Search** — Semantic search across your extracted knowledge base (`/v1/search`)
+- **Crawl** — Crawl an entire domain (`/v1/crawl`)
 
 > [Get your API key](https://knowledgesdk.com/connect)
 
@@ -39,9 +39,9 @@
 
 | Tool | Description |
 |---|---|
-| `extract_knowledge` | Extract structured knowledge from any website URL. Returns business classification, product features, pricing, and key insights. |
-| `scrape_page` | Scrape any webpage and return clean markdown content. Perfect for reading documentation, articles, or any web content. |
-| `classify_business` | Classify a business from its website URL. Returns type, industry, target audience, value proposition, and key insights. |
+| `extract_business` | Extract structured business knowledge from any website URL. Returns business classification, product features, pricing, and key insights. This is the full AI extraction pipeline. |
+| `extract_page` | Extract clean markdown content from any webpage URL. Perfect for reading documentation, articles, or any web content. |
+| `classify_business` | _(Deprecated — use `extract_business` instead)_ Classify a business from its website URL. This functionality is now included in `extract_business`. |
 | `get_sitemap` | Discover all pages on a website via its sitemap. Returns a list of URLs for further processing. |
 | `take_screenshot` | Take a full-page screenshot of any URL. Returns a base64-encoded PNG image. |
 | `search_knowledge` | Search your extracted knowledge base using natural language. Returns relevant knowledge items ranked by semantic similarity. |
@@ -68,7 +68,7 @@
       "command": "npx",
       "args": ["-y", "@knowledgesdk/mcp"],
       "env": {
-        "KNOWLEDGESDK_API_KEY": "sk_ks_your_key_here"
+        "KNOWLEDGESDK_API_KEY": "knowledgesdk_live_your_key_here"
       }
     }
   }
@@ -95,7 +95,7 @@ npx -y @knowledgesdk/mcp
 5. Add the environment variable:
 
 ```
-KNOWLEDGESDK_API_KEY=sk_ks_your_key_here
+KNOWLEDGESDK_API_KEY=knowledgesdk_live_your_key_here
 ```
 
 Alternatively, edit `~/.cursor/mcp.json` directly:
@@ -107,7 +107,7 @@ Alternatively, edit `~/.cursor/mcp.json` directly:
       "command": "npx",
       "args": ["-y", "@knowledgesdk/mcp"],
       "env": {
-        "KNOWLEDGESDK_API_KEY": "sk_ks_your_key_here"
+        "KNOWLEDGESDK_API_KEY": "knowledgesdk_live_your_key_here"
       }
     }
   }
@@ -129,7 +129,7 @@ Alternatively, edit `~/.cursor/mcp.json` directly:
       "command": "npx",
       "args": ["-y", "@knowledgesdk/mcp"],
       "env": {
-        "KNOWLEDGESDK_API_KEY": "sk_ks_your_key_here"
+        "KNOWLEDGESDK_API_KEY": "knowledgesdk_live_your_key_here"
       }
     }
   }
@@ -153,9 +153,8 @@ Or edit `~/.codeium/windsurf/mcp_config.json` directly with the same JSON block 
 
 Once configured, you can ask your AI assistant:
 
-- "Extract knowledge from https://stripe.com"
-- "Scrape the page at https://docs.stripe.com/get-started"
-- "Classify the business at https://linear.app"
+- "Extract the page at https://docs.stripe.com/get-started"
+- "Extract business knowledge from https://stripe.com"
 - "Get the sitemap for https://vercel.com"
 - "Take a screenshot of https://github.com"
 - "Search my knowledge base for 'pricing plans'"
@@ -172,7 +171,7 @@ npm install
 npm run build
 
 # Test the stdio server locally (requires KNOWLEDGESDK_API_KEY)
-KNOWLEDGESDK_API_KEY=sk_ks_your_key npm run test:local
+KNOWLEDGESDK_API_KEY=knowledgesdk_live_your_key npm run test:local
 ```
 
 ---
@@ -183,7 +182,7 @@ Full API reference → **<https://knowledgesdk.com/docs>**
 
 ## Contributing
 
-We ❤️ PRs!
+We love PRs!
 
 1. **Fork** → `git checkout -b feat/awesome`
 2. Add tests & docs

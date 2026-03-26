@@ -4,17 +4,17 @@ import {
   CallToolRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
 import {
-  ExtractKnowledgeSchema,
-  extractKnowledge,
-} from "./extractKnowledge";
-import { ScrapePageSchema, scrapePage } from "./scrapePage";
+  ExtractBusinessSchema,
+  extractBusiness,
+} from "./extractBusiness";
+import { ExtractPageSchema, extractPage } from "./extractPage";
 import { ClassifyBusinessSchema, classifyBusiness } from "./classifyBusiness";
 import { GetSitemapSchema, getSitemap } from "./getSitemap";
 import { TakeScreenshotSchema, takeScreenshot } from "./takeScreenshot";
 import { SearchKnowledgeSchema, searchKnowledge } from "./searchKnowledge";
 
-export * from "./extractKnowledge";
-export * from "./scrapePage";
+export * from "./extractBusiness";
+export * from "./extractPage";
 export * from "./classifyBusiness";
 export * from "./getSitemap";
 export * from "./takeScreenshot";
@@ -28,15 +28,15 @@ export const setupTools = (server: Server) => {
   server.setRequestHandler(ListToolsRequestSchema, async () => ({
     tools: [
       {
-        name: "extract_knowledge",
+        name: "extract_business",
         description:
-          "Extract structured knowledge from any website URL. Returns business classification, product features, pricing, and key insights.",
+          "Extract structured business knowledge from any website URL. Returns business classification, product features, pricing, and key insights. This is the full AI extraction pipeline.",
         inputSchema: {
           type: "object" as const,
           properties: {
             url: {
               type: "string",
-              description: "The website URL to extract knowledge from",
+              description: "The website URL to extract business knowledge from",
             },
             maxPages: {
               type: "number",
@@ -47,15 +47,15 @@ export const setupTools = (server: Server) => {
         },
       },
       {
-        name: "scrape_page",
+        name: "extract_page",
         description:
-          "Scrape any webpage and return clean markdown content. Perfect for reading documentation, articles, or any web content.",
+          "Extract clean markdown content from any webpage URL. Perfect for reading documentation, articles, or any web content.",
         inputSchema: {
           type: "object" as const,
           properties: {
             url: {
               type: "string",
-              description: "The URL of the webpage to scrape",
+              description: "The URL of the webpage to extract content from",
             },
           },
           required: ["url"],
@@ -64,7 +64,7 @@ export const setupTools = (server: Server) => {
       {
         name: "classify_business",
         description:
-          "Classify a business from its website URL. Returns type, industry, target audience, value proposition, and key insights.",
+          "[Deprecated — use extract_business instead] Classify a business from its website URL. This functionality is now included in extract_business.",
         inputSchema: {
           type: "object" as const,
           properties: {
@@ -135,14 +135,14 @@ export const setupTools = (server: Server) => {
 
     try {
       switch (name) {
-        case "extract_knowledge": {
-          const validatedArgs = ExtractKnowledgeSchema.parse(args);
-          return await extractKnowledge(validatedArgs, null);
+        case "extract_business": {
+          const validatedArgs = ExtractBusinessSchema.parse(args);
+          return await extractBusiness(validatedArgs, null);
         }
 
-        case "scrape_page": {
-          const validatedArgs = ScrapePageSchema.parse(args);
-          return await scrapePage(validatedArgs, null);
+        case "extract_page": {
+          const validatedArgs = ExtractPageSchema.parse(args);
+          return await extractPage(validatedArgs, null);
         }
 
         case "classify_business": {

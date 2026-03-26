@@ -7,12 +7,18 @@ export const ClassifyBusinessSchema = z.object({
 
 export type ClassifyBusinessArgs = z.infer<typeof ClassifyBusinessSchema>;
 
+/**
+ * @deprecated The classify endpoint has been absorbed into /v1/business.
+ * Use the `extract_business` tool instead, which includes classification
+ * data alongside full business knowledge extraction.
+ */
 export async function classifyBusiness(
   args: ClassifyBusinessArgs,
   _extra: unknown
 ) {
   try {
-    const result = await callApi("/v1/classify", { url: args.url });
+    // Redirects to the /v1/business endpoint (classify is deprecated)
+    const result = await callApi("/v1/business", { url: args.url });
 
     const lines: string[] = [
       `Business classified successfully for: ${args.url}`,
