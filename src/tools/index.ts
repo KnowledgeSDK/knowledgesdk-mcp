@@ -8,14 +8,12 @@ import {
   extractBusiness,
 } from "./extractBusiness";
 import { ExtractPageSchema, extractPage } from "./extractPage";
-import { ClassifyBusinessSchema, classifyBusiness } from "./classifyBusiness";
 import { GetSitemapSchema, getSitemap } from "./getSitemap";
 import { TakeScreenshotSchema, takeScreenshot } from "./takeScreenshot";
 import { SearchKnowledgeSchema, searchKnowledge } from "./searchKnowledge";
 
 export * from "./extractBusiness";
 export * from "./extractPage";
-export * from "./classifyBusiness";
 export * from "./getSitemap";
 export * from "./takeScreenshot";
 export * from "./searchKnowledge";
@@ -56,21 +54,6 @@ export const setupTools = (server: Server) => {
             url: {
               type: "string",
               description: "The URL of the webpage to extract content from",
-            },
-          },
-          required: ["url"],
-        },
-      },
-      {
-        name: "classify_business",
-        description:
-          "[Deprecated — use extract_business instead] Classify a business from its website URL. This functionality is now included in extract_business.",
-        inputSchema: {
-          type: "object" as const,
-          properties: {
-            url: {
-              type: "string",
-              description: "The website URL of the business to classify",
             },
           },
           required: ["url"],
@@ -143,11 +126,6 @@ export const setupTools = (server: Server) => {
         case "extract_page": {
           const validatedArgs = ExtractPageSchema.parse(args);
           return await extractPage(validatedArgs, null);
-        }
-
-        case "classify_business": {
-          const validatedArgs = ClassifyBusinessSchema.parse(args);
-          return await classifyBusiness(validatedArgs, null);
         }
 
         case "get_sitemap": {

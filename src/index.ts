@@ -41,9 +41,8 @@ export const createKnowledgeSdkMcpServer = (
 };
 
 // Re-export types for convenience
-export * from "./tools/extractKnowledge";
-export * from "./tools/scrapePage";
-export * from "./tools/classifyBusiness";
+export * from "./tools/extractBusiness";
+export * from "./tools/extractPage";
 export * from "./tools/getSitemap";
 export * from "./tools/takeScreenshot";
 export * from "./tools/searchKnowledge";
