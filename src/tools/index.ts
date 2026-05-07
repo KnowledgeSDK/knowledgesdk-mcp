@@ -10,13 +10,15 @@ import {
 import { ExtractPageSchema, extractPage } from "./extractPage";
 import { GetSitemapSchema, getSitemap } from "./getSitemap";
 import { TakeScreenshotSchema, takeScreenshot } from "./takeScreenshot";
-import { SearchKnowledgeSchema, searchKnowledge } from "./searchKnowledge";
+// Search (vector search across indexed knowledge items) is disabled until
+// indexing is re-enabled server-side.
+// import { SearchKnowledgeSchema, searchKnowledge } from "./searchKnowledge";
 
 export * from "./extractBusiness";
 export * from "./extractPage";
 export * from "./getSitemap";
 export * from "./takeScreenshot";
-export * from "./searchKnowledge";
+// export * from "./searchKnowledge";
 
 /**
  * Set up all tools on the MCP server
@@ -89,26 +91,7 @@ export const setupTools = (server: Server) => {
           required: ["url"],
         },
       },
-      {
-        name: "search_knowledge",
-        description:
-          "Search your extracted knowledge base using natural language. Returns relevant knowledge items ranked by semantic similarity.",
-        inputSchema: {
-          type: "object" as const,
-          properties: {
-            query: {
-              type: "string",
-              description:
-                "Natural language query to search the knowledge base",
-            },
-            limit: {
-              type: "number",
-              description: "Maximum number of results to return (optional)",
-            },
-          },
-          required: ["query"],
-        },
-      },
+      // search_knowledge tool disabled — vector search is paused.
     ],
   }));
 
@@ -136,11 +119,6 @@ export const setupTools = (server: Server) => {
         case "take_screenshot": {
           const validatedArgs = TakeScreenshotSchema.parse(args);
           return await takeScreenshot(validatedArgs, null);
-        }
-
-        case "search_knowledge": {
-          const validatedArgs = SearchKnowledgeSchema.parse(args);
-          return await searchKnowledge(validatedArgs, null);
         }
 
         default:
