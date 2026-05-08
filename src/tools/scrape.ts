@@ -1,15 +1,15 @@
 import { z } from "zod";
 import { callApi } from "../lib/config";
 
-export const ExtractPageSchema = z.object({
-  url: z.string().url().describe("The URL of the webpage to extract content from"),
+export const ScrapeSchema = z.object({
+  url: z.string().url().describe("The URL of the webpage to scrape"),
 });
 
-export type ExtractPageArgs = z.infer<typeof ExtractPageSchema>;
+export type ScrapeArgs = z.infer<typeof ScrapeSchema>;
 
-export async function extractPage(args: ExtractPageArgs, _extra: unknown) {
+export async function scrape(args: ScrapeArgs, _extra: unknown) {
   try {
-    const result = await callApi("/v1/extract", { url: args.url });
+    const result = await callApi("/v1/scrape", { url: args.url });
 
     const markdown =
       result.markdown ||

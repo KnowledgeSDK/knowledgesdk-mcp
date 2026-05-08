@@ -3,19 +3,21 @@ import {
   ListToolsRequestSchema,
   CallToolRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
-import {
-  ExtractBusinessSchema,
-  extractBusiness,
-} from "./extractBusiness";
-import { ExtractPageSchema, extractPage } from "./extractPage";
+// Extract (multi-page AI knowledge extraction) is disabled while we focus on
+// the scrape surface. Re-enable to bring back the `extract` tool.
+// import {
+//   ExtractSchema,
+//   extract,
+// } from "./extract";
+import { ScrapeSchema, scrape } from "./scrape";
 import { GetSitemapSchema, getSitemap } from "./getSitemap";
 import { TakeScreenshotSchema, takeScreenshot } from "./takeScreenshot";
 // Search (vector search across indexed knowledge items) is disabled until
 // indexing is re-enabled server-side.
 // import { SearchKnowledgeSchema, searchKnowledge } from "./searchKnowledge";
 
-export * from "./extractBusiness";
-export * from "./extractPage";
+// export * from "./extract"; // disabled: scrape-only for now
+export * from "./scrape";
 export * from "./getSitemap";
 export * from "./takeScreenshot";
 // export * from "./searchKnowledge";
@@ -27,35 +29,17 @@ export const setupTools = (server: Server) => {
   // Register tools/list handler
   server.setRequestHandler(ListToolsRequestSchema, async () => ({
     tools: [
+      // extract tool disabled — scrape-only surface for now.
       {
-        name: "extract_business",
+        name: "scrape",
         description:
-          "Extract structured business knowledge from any website URL. Returns business classification, product features, pricing, and key insights. This is the full AI extraction pipeline.",
+          "Scrape clean markdown content from any webpage URL. Perfect for reading documentation, articles, or any web content.",
         inputSchema: {
           type: "object" as const,
           properties: {
             url: {
               type: "string",
-              description: "The website URL to extract business knowledge from",
-            },
-            maxPages: {
-              type: "number",
-              description: "Maximum number of pages to crawl (optional)",
-            },
-          },
-          required: ["url"],
-        },
-      },
-      {
-        name: "extract_page",
-        description:
-          "Extract clean markdown content from any webpage URL. Perfect for reading documentation, articles, or any web content.",
-        inputSchema: {
-          type: "object" as const,
-          properties: {
-            url: {
-              type: "string",
-              description: "The URL of the webpage to extract content from",
+              description: "The URL of the webpage to scrape",
             },
           },
           required: ["url"],
@@ -79,13 +63,52 @@ export const setupTools = (server: Server) => {
       {
         name: "take_screenshot",
         description:
-          "Take a full-page screenshot of any URL. Returns a base64-encoded PNG image.",
+          'Take a screenshot of any URL. Supports viewport presets (mobile/tablet/desktop/desktop_hd) or custom dimensions, full-page capture, element-only capture via CSS selector, and SPA-aware waits. Returns the rendered PNG (inline image content) plus a permanent CDN URL.',
         inputSchema: {
           type: "object" as const,
           properties: {
             url: {
               type: "string",
               description: "The URL of the webpage to screenshot",
+            },
+            viewport: {
+              description:
+                'Viewport size. Either a preset string ("mobile" 390x844, "tablet" 820x1180, "desktop" 1280x800, "desktop_hd" 1920x1080) or a custom object {"width": number, "height": number}. Default: "desktop".',
+              oneOf: [
+                {
+                  type: "string",
+                  enum: ["mobile", "tablet", "desktop", "desktop_hd"],
+                },
+                {
+                  type: "object",
+                  properties: {
+                    width: { type: "integer", minimum: 320, maximum: 3840 },
+                    height: { type: "integer", minimum: 320, maximum: 2160 },
+                  },
+                  required: ["width", "height"],
+                },
+              ],
+            },
+            fullPage: {
+              type: "boolean",
+              description:
+                "Capture the entire scrollable document. Use for landing pages or full-article snapshots. Default: false.",
+            },
+            selector: {
+              type: "string",
+              description:
+                "CSS selector to capture only that element. Useful for hero sections, pricing cards, charts.",
+            },
+            waitUntil: {
+              type: "string",
+              enum: ["load", "dom_content_loaded", "network_idle"],
+              description:
+                'When the page is "ready" before capture. Use "network_idle" for SPAs. Default: "load".',
+            },
+            waitFor: {
+              type: "string",
+              description:
+                "CSS selector to wait for before capture. Useful for content that hydrates asynchronously.",
             },
           },
           required: ["url"],
@@ -101,14 +124,10 @@ export const setupTools = (server: Server) => {
 
     try {
       switch (name) {
-        case "extract_business": {
-          const validatedArgs = ExtractBusinessSchema.parse(args);
-          return await extractBusiness(validatedArgs, null);
-        }
-
-        case "extract_page": {
-          const validatedArgs = ExtractPageSchema.parse(args);
-          return await extractPage(validatedArgs, null);
+        // extract case disabled — scrape-only surface for now.
+        case "scrape": {
+          const validatedArgs = ScrapeSchema.parse(args);
+          return await scrape(validatedArgs, null);
         }
 
         case "get_sitemap": {

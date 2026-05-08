@@ -1,8 +1,8 @@
 import { z } from "zod";
 import { callApi } from "../lib/config";
 
-export const ExtractBusinessSchema = z.object({
-  url: z.string().url().describe("The website URL to extract business knowledge from"),
+export const ExtractSchema = z.object({
+  url: z.string().url().describe("The website URL to extract knowledge from"),
   maxPages: z
     .number()
     .int()
@@ -11,10 +11,10 @@ export const ExtractBusinessSchema = z.object({
     .describe("Maximum number of pages to crawl (optional)"),
 });
 
-export type ExtractBusinessArgs = z.infer<typeof ExtractBusinessSchema>;
+export type ExtractArgs = z.infer<typeof ExtractSchema>;
 
-export async function extractBusiness(
-  args: ExtractBusinessArgs,
+export async function extract(
+  args: ExtractArgs,
   _extra: unknown
 ) {
   try {
@@ -23,10 +23,10 @@ export async function extractBusiness(
       body.maxPages = args.maxPages;
     }
 
-    const result = await callApi("/v1/business", body);
+    const result = await callApi("/v1/extract", body);
 
     const lines: string[] = [
-      `Business knowledge extracted successfully from: ${args.url}`,
+      `Knowledge extracted successfully from: ${args.url}`,
       "",
     ];
 

@@ -26,8 +26,8 @@
 
 **KnowledgeSDK** is an API that turns any website into structured, searchable knowledge — built for developers, AI agents, and data pipelines.
 
-- **Extract** — Convert any URL to clean Markdown (`/v1/extract`)
-- **Business** — Full AI extraction: business classification, product features, pricing, and key insights (`/v1/business`)
+- **Scrape** — Convert any URL to clean Markdown (`/v1/scrape`)
+- **Extract** — Full AI extraction: business classification, product features, pricing, and key insights (`/v1/extract`)
 - **Screenshot** — Full-page screenshots of any website (`/v1/screenshot`)
 - **Sitemap** — Discover all URLs on a domain (`/v1/sitemap`)
 - **Search** — Semantic search across your extracted knowledge base (`/v1/search`)
@@ -39,9 +39,8 @@
 
 | Tool | Description |
 |---|---|
-| `extract_business` | Extract structured business knowledge from any website URL. Returns business classification, product features, pricing, and key insights. This is the full AI extraction pipeline. |
-| `extract_page` | Extract clean markdown content from any webpage URL. Perfect for reading documentation, articles, or any web content. |
-| `classify_business` | _(Deprecated — use `extract_business` instead)_ Classify a business from its website URL. This functionality is now included in `extract_business`. |
+| `extract` | Extract structured knowledge from any website URL. Returns business classification, product features, pricing, and key insights. This is the full AI extraction pipeline. |
+| `scrape` | Scrape clean markdown content from any webpage URL. Perfect for reading documentation, articles, or any web content. |
 | `get_sitemap` | Discover all pages on a website via its sitemap. Returns a list of URLs for further processing. |
 | `take_screenshot` | Take a full-page screenshot of any URL. Returns a base64-encoded PNG image. |
 | `search_knowledge` | Search your extracted knowledge base using natural language. Returns relevant knowledge items ranked by semantic similarity. |
@@ -153,8 +152,8 @@ Or edit `~/.codeium/windsurf/mcp_config.json` directly with the same JSON block 
 
 Once configured, you can ask your AI assistant:
 
-- "Extract the page at https://docs.stripe.com/get-started"
-- "Extract business knowledge from https://stripe.com"
+- "Scrape the page at https://docs.stripe.com/get-started"
+- "Extract knowledge from https://stripe.com"
 - "Get the sitemap for https://vercel.com"
 - "Take a screenshot of https://github.com"
 - "Search my knowledge base for 'pricing plans'"
